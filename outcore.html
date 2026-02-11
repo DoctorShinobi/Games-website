@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outcore - My Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="game-page outcore-page">
+    <div class="background-overlay"></div>
+    
+    <div class="container">
+        <div class="game-content">
+            <div class="game-header">
+                <img src="images/OUTCORE LOGO.png" alt="Outcore" style="max-width: 600px; width: 100%; height: auto; margin: 0 auto; display: block;">
+            </div>
+            
+            <div class="game-main">
+                <div class="game-description">
+                    <p>All you wanted was a nice game. But now you find yourself opening Windows apps like Paint & Notepad to solve puzzles, and searching for files on your computer that you didn't put there...</p>
+                    <p>Who is she? Why did she appear on your desktop? Let's dive into her memories and find out.</p>
+                    <p>Experience a unique adventure that blurs the line between game and reality, where your computer becomes the stage for an unfolding mystery.</p>
+                </div>
+                
+                <div class="game-image">
+                    <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/zEJ10UF-pjA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <div class="features">
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Interactive Desktop Experience</strong> - Use real Windows applications to solve puzzles and uncover secrets. Paint, Notepad, and more become part of your adventure.</li>
+                    <li><strong>Mysterious Narrative</strong> - Follow the story of a mysterious girl who appears on your desktop and explore her fragmented memories.</li>
+                    <li><strong>Immersive Puzzles</strong> - Solve intricate puzzles that blend seamlessly with your actual desktop environment.</li>
+                    <li><strong>Unique Atmosphere</strong> - Experience an atmospheric journey that challenges your perception of what a game can be.</li>
+                </ul>
+            </div>
+            
+            <div class="gallery">
+                <h2>Screenshots</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item" onclick="openLightbox(0)">
+                        <img src="images/Outcore screenshots/0B.png" alt="Screenshot 1">
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox(1)">
+                        <img src="images/Outcore screenshots/1.png" alt="Screenshot 2">
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox(2)">
+                        <img src="images/Outcore screenshots/2.png" alt="Screenshot 3">
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox(3)">
+                        <img src="images/Outcore screenshots/3.png" alt="Screenshot 4">
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox(4)">
+                        <img src="images/Outcore screenshots/4.jpg" alt="Screenshot 5">
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox(5)">
+                        <img src="images/Outcore screenshots/5.png" alt="Screenshot 6">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="steam-widget">
+                <iframe src="https://store.steampowered.com/widget/1275670/" frameborder="0" width="646" height="190"></iframe>
+            </div>
+
+            <div class="social-links">
+                <a href="https://www.patreon.com/c/DoctorShinobi" target="_blank" class="social-link">Patreon</a>
+                <a href="https://x.com/OrgadArbel" target="_blank" class="social-link">X (Twitter)</a>
+                <a href="https://bsky.app/profile/doctorshinobi.bsky.social" target="_blank" class="social-link">Bluesky</a>
+                <a href="https://www.youtube.com/@DoctorShinobi" target="_blank" class="social-link">YouTube</a>
+                <a href="https://discord.com/invite/yqWpSv5NPp" target="_blank" class="social-link">Discord</a>
+                <a href="https://www.instagram.com/deadwatchgame/" target="_blank" class="social-link">Instagram</a>
+                <a href="https://www.reddit.com/r/outcore/" target="_blank" class="social-link">Reddit</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
+            <button class="lightbox-nav lightbox-prev" onclick="changeImage(-1, event)">&#10094;</button>
+            <img id="lightbox-img" src="" alt="Enlarged screenshot">
+            <button class="lightbox-nav lightbox-next" onclick="changeImage(1, event)">&#10095;</button>
+        </div>
+    </div>
+
+    <script>
+        const images = [
+            'images/Outcore screenshots/0B.png',
+            'images/Outcore screenshots/1.png',
+            'images/Outcore screenshots/2.png',
+            'images/Outcore screenshots/3.png',
+            'images/Outcore screenshots/4.jpg',
+            'images/Outcore screenshots/5.png'
+        ];
+        let currentImageIndex = 0;
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            document.getElementById('lightbox-img').src = images[currentImageIndex];
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(event) {
+            if (event.target.id === 'lightbox' || event.target.classList.contains('lightbox-close')) {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function changeImage(direction, event) {
+            event.stopPropagation();
+            currentImageIndex += direction;
+            if (currentImageIndex < 0) {
+                currentImageIndex = images.length - 1;
+            } else if (currentImageIndex >= images.length) {
+                currentImageIndex = 0;
+            }
+            document.getElementById('lightbox-img').src = images[currentImageIndex];
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (document.getElementById('lightbox').classList.contains('active')) {
+                if (event.key === 'Escape') {
+                    closeLightbox({target: document.getElementById('lightbox')});
+                } else if (event.key === 'ArrowLeft') {
+                    changeImage(-1, event);
+                } else if (event.key === 'ArrowRight') {
+                    changeImage(1, event);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
